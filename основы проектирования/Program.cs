@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using основы_проектирования;
 
-    string str ="Файлы: \'ghbdtn vbh\' ; 2024.02.02;      23;"; 
+    string str ="Файлы: \'ghbdtn vbh\' ; 2024.02.02; 23;"; 
     Console.Write(str);
     //str = str.Replace(" ", "");
     str = str.Replace(":", ";");

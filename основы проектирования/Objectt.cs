@@ -20,7 +20,7 @@ namespace основы_проектирования
             Date = date;
             Size = size;
         }
-        public string PrintInf()
+        public virtual string PrintInf()
         {
             return $"\nОбъект: {Type}\nНазвание файла - {Name}\nДата создания - {Date.ToString("yyyy.MM.dd")}\nРазмер - {Size} байт\n";
         }
