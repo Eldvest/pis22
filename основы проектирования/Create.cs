@@ -10,29 +10,13 @@ namespace основы_проектирования
     {
         static public Objectt CreateObject(string str)
         {
-
-
             string[] words = str.Split(';', StringSplitOptions.RemoveEmptyEntries);
-            string type = words[0].Trim();
-            string name = words[1].Trim();
-            if (!DateTime.TryParse(words[2], out DateTime date))
+            switch (words[0])
             {
-                return null;
-            }
-            if (!int.TryParse(words[3], out int size))
-            {
-                return null;
-            }
-
-            switch (type)
-            {
-
                 case "VideoFile":
-                    if (!TimeSpan.TryParse(words[4], out TimeSpan duration)) { return null; }
-                    return new VideoFile(type, name, date, size, duration);
-
+                    return new VideoFile(words[0], words[1],ParseDate(words[2]),ParseInt(words[3]), ParseTime(words[4]));
                 case "TextFile":
-                    return new TextFile(type, name, date, size, words[4].Trim());
+                    return new TextFile(words[0], words[1], ParseDate(words[2]), ParseInt(words[3]),words[4]);
                 default:
                     return null;
             }
@@ -41,7 +25,6 @@ namespace основы_проектирования
 
         static public List<Objectt> ParseFile(string filePath)
         {
-
             List<Objectt> files = new List<Objectt>();
             if (File.Exists(filePath))
             {
@@ -59,18 +42,10 @@ namespace основы_проектирования
                     }
                 }
             }
-            else
-            {
-                Console.WriteLine($"Файл не найден по пути: {filePath}");
-            }
-
             return files;
         }
-
-
         static public List<Objectt> ParseString(string str)
         {
-
             List<Objectt> objects = new List<Objectt>();
             string[] lines = str.Split('\n');
             foreach (string line in lines)
@@ -80,9 +55,25 @@ namespace основы_проектирования
                 {
                     objects.Add(obj);
                 }
-
             }
             return objects;
+        }
+        public static DateTime ParseDate(string dateString)
+        {
+            if (DateTime.TryParse(dateString, out DateTime date)) { return date; }
+            else { throw new ArgumentException("Неверный формат даты"); }
+        }
+        public static int ParseInt(string sizeString)
+        {
+            if (int.TryParse(sizeString, out int size)) { return size; }
+            else throw new ArgumentException("Неверный размер");
+        }
+        public static TimeSpan ParseTime(string timeString)
+        {
+            if (TimeSpan.TryParse(timeString, out TimeSpan duration)){ 
+                return duration; 
+            }
+            else throw new ArgumentException("Неверный формат времени");
         }
     }
 }

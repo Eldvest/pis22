@@ -12,7 +12,6 @@ namespace основы_проектирования
         public TimeSpan Duration { get; set; }
         public VideoFile(string type, string name, DateTime date, int size, TimeSpan duration) : base(type, name, date, size)
         {
-
             Duration = duration;
         }
         public override string PrintInf()

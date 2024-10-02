@@ -13,7 +13,6 @@ namespace основы_проектирования
         public TextFile(string type, string name, DateTime date, int size, string extention) : base(type, name, date, size)
         {
             Extension = extention;
-
         }
         public override string PrintInf()
         {
